@@ -3,50 +3,53 @@
 \section{Latar Belakang}
 
 Internet merupakan salah satu inovasi yang mengubah dunia. Internet
-memungkinkan pengguna untuk berkomunikasi, berbagi informasi, dan
+memungkinkan penggunanya untuk berkomunikasi, berbagi informasi, dan
 mengakses berbagai layanan. Salah satu bentuk layanan tersebut adalah
 layanan komputasi dimana pengguna dapat menggunakan sumber daya komputasi
-yang telah disediakan, sehingga pengguna tidak perlu melakukan komputasi
-di perangkat mereka sendiri. Hal tersebut memungkinkan pengguna untuk melakukan
-sebuah komputasi yang berat tanpa harus memiliki perangkat yang memadai.
-Salah satu konsep yang biasa digunakan adalah konsep \emph{containerization}
-dimana komputer membuat sebuah \emph{container} yang berisi
-aplikasi dan semua dependensinya.
+yang telah disediakan sehingga pengguna tidak perlu melakukan komputasi
+di perangkat mereka sendiri. Hal tersebut memungkinkan pengguna untuk
+melakukan komputasi yang berat tanpa harus memiliki perangkat yang
+memadai.
 
-Untuk mengelola sumber daya komputasi yang menggunakan konsep \emph{containerization},
-diperlukan sebuah sistem manajemen yang dapat mengatur sumber daya komputasi,
-mengatur \emph{container}, dan mengatur jaringan. Salah satu sistem manajemen
-yang dapat digunakan adalah Kubernetes. Kubernetes adalah sebuah sistem manajemen
-orkestrasi \emph{container} yang dikembangkan oleh Google. Kubernetes akan mengatur
-\emph{container} yang berjalan di dalam \emph{node} yang ada di dalam \emph{cluster}.
+Pengelolaan sumber daya komputasi memerlukan manajemen yang
+baik agar sumber daya tersebut dapat digunakan secara efisien dan sesuai
+dengan kebutuhan pengguna. Untuk mengelola sumber daya komputasi tersebut,
+salah satu \emph{tools} yang dapat digunakan adalah Kubernetes. Kubernetes
+adalah sebuah sistem manajemen \emph{container} sumber terbuka.
+
+Namun, penggunaan Kubernetes secara \emph{default} bukan berupa \emph{multi-tenant}.
+Semua \emph{pods} yang merupakan unit terkecil di dalam Kubernetes dapat berinteraksi
+satu sama lain dan semua \emph{network traffic} tidak terenkripsi \parencite{kubernetes-website-multi-tenancy}.
+Hal tersebut dapat menimbulkan masalah karena pengguna yang satu dapat
+melihat data dari pengguna yang lain. Oleh karena itu, diperlukan
+implementasi \emph{multi-tenancy} pada Kubernetes jika sebuah kluster Kubernetes
+akan digunakan oleh lebih dari satu pengguna.
+
+Pada penelitian ini akan dibahas mengenai implementasi \emph{multi-tenancy}
+pada Kubernetes. Implementasi tersebut diharapkan membuat kluster
+Kubernetes dapat digunakan oleh beberapa pengguna sekaligus.
 
 \section{Rumusan Masalah}
 
-% Ubah paragraf berikut sesuai dengan rumusan masalah dari tugas akhir
 Berdasarkan hal yang telah dipaparkan di latar belakang, rumusan masalah
 yang diangkat dalam Tugas Akhir ini adalah sebagai berikut:
 \begin{enumerate}
-  \vspace{-0.3cm}\item{Bagaimana membuat virtual cluster yang bisa
-  menghidupkan mesin dan mematikan mesin kapan saja, bisa men-generate
-  mesin secara instant (case virtual cluster pada saat ini tidak bisa seperti itu,
-  mesin harus hidup setiap saat?)}
-  \vspace{-0.3cm}\item{Bagaimana ...}
-  \vspace{-0.3cm}\item{Bagaimana ...}
+  \vspace{-0.3cm}\item{Bagaimana cara mengimplementasikan \emph{multi-tenancy} pada kluster Kubernetes?}
+  \vspace{-0.3cm}\item{Apa perbedaan implementasi \emph{multi-tenancy} yang dapat digunakan pada kluster Kubernetes?}
 \end{enumerate}
 
 \section{Batasan Masalah atau Ruang Lingkup}
 
 Batasan masalah atau ruang lingkup dari penelitian ini adalah sebagai berikut:
 \begin{enumerate}
-  \vspace{-0.3cm}\item{Bagaimana ...}
-  \vspace{-0.3cm}\item{Bagaimana ...}
+  \vspace{-0.3cm}\item{asdasdad}
 \end{enumerate}
 
 \section{Tujuan}
 
-Tujuan dari penelitian ini adalah menerapkan ...
+Tujuan dari penelitian ini adalah mengimplementasikan \emph{multi-tenancy}
+pada kluster Kubernetes yang dapat digunakan.
 
 \section{Manfaat}
 
-% Ubah paragraf berikut sesuai dengan tujuan penelitian dari tugas akhir
-Manfaat dari penelitian ini adalah ...
+Manfaat dari penelitian ini adalah 
