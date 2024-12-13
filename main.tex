@@ -1,5 +1,5 @@
 % Pengaturan ukuran teks dan bentuk halaman dua sisi
-\documentclass[12pt]{book}
+\documentclass[12pt,oneside]{book}
 
 % Pengaturan ukuran halaman dan margin
 \usepackage[a4paper,top=30mm,left=30mm,right=20mm,bottom=25mm]{geometry}
@@ -10,10 +10,6 @@
 % Pengaturan caption untuk tabel
 \usepackage{caption}
 
-% Judul dokumen
-\title{Proposal Tugas Akhir ITS}
-\author{Aptanagi, Urdhanaka}
-
 % Pengaturan detail pada file PDF
 \usepackage[pdfauthor={\@author},bookmarksnumbered,pdfborder={0 0 0}]{hyperref}
 
@@ -21,7 +17,6 @@
 \setlength{\parindent}{2em}
 
 % Package lainnya
-\usepackage{changepage}
 \usepackage{etoolbox} % Mengubah fungsi default
 
 % Pengaturan jenis karakter
@@ -47,11 +42,17 @@
 \usepackage[titles]{tocloft}
 \setlength{\cftsecindent}{2em}
 \setlength{\cftsubsecindent}{2em}
+\setlength{\cftsubsubsecindent}{2em}
 \setlength{\cftbeforechapskip}{1.5ex}
-\setlength{\cftbeforesecskip}{1.5ex}
+\setlength{\cftbeforesecskip}{1ex}
+\setlength{\cftbeforesubsecskip}{1ex}
+\setlength{\cftbeforesubsubsecskip}{1ex}
 \setlength{\cftbeforetoctitleskip}{0cm}
-\setlength{\cftbeforeloftitleskip}{0cm}
+\setlength{\cftbeforeloftitleskip}{4ex}
+\setlength{\cftafterloftitleskip}{0cm}
 \setlength{\cftbeforelottitleskip}{0cm}
+\setlength{\cftfigindent}{0pt}
+\setlength{\cfttabindent}{0pt}
 \renewcommand{\cfttoctitlefont}{\hfill\Large\bfseries} % command untuk membuat heading bold dan besar
 \renewcommand{\cftaftertoctitle}{\hfill}
 \renewcommand{\cftloftitlefont}{\hfill\Large\bfseries}
@@ -81,11 +82,13 @@
 \titleformat{\chapter}[hang]{\centering\bfseries\large}{BAB\ \arabic{chapter}\ }{0ex}{\vspace{0ex}\centering}
 \titleformat*{\section}{\large\bfseries}
 \titleformat*{\subsection}{\normalsize\bfseries}
+\titleformat*{\subsubsection}{\normalsize\bfseries}
 \titlespacing{\chapter}{0ex}{0ex}{4ex}
 \titlespacing{\section}{0ex}{1ex}{0ex}
 \titlespacing{\subsection}{0ex}{0.5ex}{0ex}
 \titlespacing{\subsubsection}{0ex}{0.5ex}{0ex}
-\setcounter{secnumdepth}{3} % Untuk memberi penomoran pada \subsubsection
+\setcounter{secnumdepth}{4} % Untuk memberi penomoran pada \subsubsection
+\setcounter{tocdepth}{4}
 
 \counterwithin{figure}{chapter}
 \counterwithin{table}{chapter}
@@ -98,6 +101,10 @@
 
 % Menambahkan resource daftar pustaka
 \addbibresource{pustaka/pustaka.bib}
+
+% table related
+\newcommand{\w}{}
+\newcommand{\G}{\cellcolor{gray}}
 
 % Isi keseluruhan dokumen
 \begin{document}
@@ -113,33 +120,27 @@
 
   % Lembar pengesahan
   \input{lainnya/lembar-pengesahan.tex}
-  \cleardoublepage
 
   % Abstrak
   \input{lainnya/abstrak.tex}
-  \cleardoublepage
 
   \input{lainnya/abstrak-en.tex}
-  \cleardoublepage
 
   \begin{spacing}{1}
     % Daftar isi
     \renewcommand*\contentsname{DAFTAR ISI}
     \addcontentsline{toc}{chapter}{\contentsname}
     \tableofcontents
-    \cleardoublepage
 
     % Daftar gambar
-    % \renewcommand*\listfigurename{DAFTAR GAMBAR}
-    % \addcontentsline{toc}{chapter}{\listfigurename}
-    % \listoffigures
-    % \cleardoublepage
+    \renewcommand*\listfigurename{DAFTAR GAMBAR}
+    \addcontentsline{toc}{chapter}{\listfigurename}
+    \listoffigures
 
     % Daftar tabel
     \renewcommand*\listtablename{DAFTAR TABEL}
     \addcontentsline{toc}{chapter}{\listtablename}
     \listoftables
-    \cleardoublepage
   \end{spacing}
 
   % Nomor halaman isi dimulai dari sini
@@ -147,18 +148,12 @@
 
   % Konten pendahuluan
   \input{konten/1-pendahuluan.tex}
-  \cleardoublepage
 
   % Konten tinjauan pustaka
   \input{konten/2-tinjauan-pustaka.tex}
-  \cleardoublepage
 
   % Konten metodologi
   \input{konten/3-metodologi.tex}
-  \cleardoublepage
-
-  \input{konten/4-jadwal-penelitian.tex}
-  \cleardoublepage
 
   % Daftar pustaka
   \chapter*{DAFTAR PUSTAKA}

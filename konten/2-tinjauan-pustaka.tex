@@ -1,23 +1,280 @@
 \chapter{TINJAUAN PUSTAKA}
 
+Pada bab ini akan dibahas mengenai penelitian terkait tentang \emph{multi-tenancy}
+dan teori dasar yang akan digunakan dalam penelitian.
+
 \section{Hasil penelitian/perancangan terdahulu}
 
-Kubernetes memiliki beberapa fitur yang memungkinkan untuk penerapan
-\emph{multi-tenancy}. Salah satu fitur tersebut adalah \emph{namespace}.
-\emph{Namespace} adalah fitur yang memisahkan sumber daya di dalam kluster
-ke dalam beberapa bagian.
+\subsection{Multi-tenancy in Cloud Computing}
+
+Paper ini membahas mengenai \emph{multi-tenancy} pada \emph{cloud computing}
+dan bagaimana \emph{multi-tenancy} dapat diimplementasikan pada \emph{cloud computing}.
+\emph{Multi-tenancy} dapat berdampak positif pada perkembangan \emph{cloud computing} karena
+dengan \emph{multi-tenancy}, penyedia jasa dapat menggunakan \emph{resources} secara efisien
+dengan cara membagi \emph{resources} tersebut kepada beberapa penyewa. Dengan demikian, penyedia
+jasa dapat mengurangi \emph{cost} dalam penyediaan \emph{resources}.
+
+\emph{Multi-tenancy} pada \emph{cloud computing} juga memiliki tantangan dalam
+implementasinya yaitu di bidang keamanan. Dalam \emph{multi-tenancy}, penyewa
+menggunakan \emph{resources} yang sama dengan penyewa lainnya. Hal ini dapat
+menyebabkan masalah ketika salah satu penyewa memiliki tujuan tidak baik. Karena
+penyewa menggunakan \emph{resources} yang sama, proses mitigasi tradisional tidak
+dapat digunakan \parencite{6830928}.
+
+% NOTE: this one might be not relevant
+\subsection{ViteraaS: Virtual Cluster as a Service}
+
+Implementasi penggunaan \emph{virtual cluster} pada penelitian ini
+digunakan untuk membagi banyak komputer fisik yang tergabung menjadi satu klaster
+menjadi beberapa klaster virtual yang lebih kecil sesuai dengan kriteria yang diberikan oleh
+pengguna seperti jumlah \emph{nodes} yang dibutuhkan \parencite{6133210}.
+
+\subsection{A Multi-Tenant Framework for Cloud Container Services}
+
+Penelitian ini membahas mengenai implementasi \emph{multi-tenancy} pada
+Kubernetes dengan menggunakan \emph{framework VirtualCluster}. \emph{Framework}
+yang diajukan pada penelitian ini menyediakan isolasi pada \emph{control plane}
+dan \emph{data plane} namun tetap berada di \emph{resources} fisik yang sama.
+
+Implementasi dari \emph{framework} ini membuat setiap pengguna dalam klaster
+memiliki \emph{control plane} dan \emph{data plane} tersendiri, sehingga dari
+sisi pengguna, pengguna seperti memiliki sebuah klaster itu secara menyeluruh
+dan tidak mengetahui pengguna lain yang menggunakan \emph{resources} fisik yang sama
+\parencite{9546524}.
 
 \section{Teori/Konsep Dasar}
 
-\subsection{Kluster}
+\subsection{Kubernetes}
 
-Kluster adalah konsep dasar dari Kubernetes. Kluster adalah kumpulan dari
-satu atau lebih \emph{node} yang digunakan untuk menjalankan \emph{pods} yang
-menjalankan aplikasi yang dikemas (\emph{containerized}). 
+Kubernetes adalah sebuah sistem manajemen aplikasi yang dikemas (\emph{containerized})
+yang bersifat sumber terbuka. Kubernetes dibuat berdasarkan \emph{tool} internal
+yang diciptakan oleh Google bernama Borg untuk mengelola layanan mereka dalam bentuk
+\emph{container} \parencite{43438} kemudian beberapa pengembang Borg menciptakan
+\emph{tool} serupa namun bersifat sumber terbuka yang kemudian diberi nama Kubernetes.
+
+\subsection{Arsitektur Kubernetes}
+
+Kubernetes mengumpulkan satu atau lebih mesin/server menjadi sebuah klaster. Klaster
+pada Kubernetes adalah tempat dimana semua aplikasi, \emph{jobs}, dan komponen Kubernetes
+berjalan. Dalam satu klaster Kubernetes terdapat satu server atau satu kelompok server
+yang berperan sebagai \emph{control plane} dan server sisanya menjadi \emph{worker node}.
+
+Pada \emph{master node}, terdapat beberapa komponen yang mendukung kelangsungan
+klaster seperti kube-apiserver, kube-controller-manager, kube-scheduler, dan etcd.
+Sedangkan pada \emph{nodes} lainnya yang disebut sebagai \emph{worker node}
+terdapat komponen kubelet dan kube-proxy \parencite{kubernetes-website-components}.
+\emph{Worker node} bertugas untuk menjalankan \emph{Pod} yang berisi aplikasi
+\emph{containerized}.
+
+\subsubsection{Kubernetes Control Plane}
+
+Kubernetes Control Plane adalah komponen yang bertugas untuk mengatur
+klaster Kubernetes. \emph{Node} yang berperan sebagai Kubernetes Control Plane
+membuat keputusan terhadap klaster sesuai dengan \emph{event} yang terjadi atau
+konfigurasi yang diberikan. Interaksi dengan \emph{control plane} dapat dilakukan
+melalui \emph{command line tool} dari Kubernetes yaitu kubectl.
+Kubernetes Control Plane terdiri dari komponen-komponen
+dalam membantu menjalankan tugas \emph{control plane} yaitu kube-apiserver,
+etcd, kube-controller-manager, kube-scheduler, dan cloud-controller-manager.
+
+\begin{enumerate}[itemsep=-0.2cm, topsep=-0.3cm]
+  \item{Komponen kube-apiserver merupakan komponen yang
+    bertujuan sebagai antarmuka untuk interaksi antar komponen dalam bentuk
+    RESTful. Selain itu, kube-apiserver juga mengelola data untuk \emph{api objects}
+    di dalam Kubernetes.
+  }
+  \item{Komponen etcd merupakan komponen yang digunakan
+    oleh Kubernetes untuk menyimpan data dalam bentuk \emph{key-value}.
+    Data tersebut kemudian digunakan sebagai konfigurasi klaster, proses
+    \emph{service discovery}, dan data-data yang akan digunakan nantinya.
+  }
+  \item{Komponen kube-controller-manager adalah komponen yang
+    mengawasi jalannya klaster. Komponen ini mengawasi \emph{shared state} dari
+    klaster tersebut melalui kube-apiserver dan melakukan tindakan yang diperlukan
+    agar mencapai \emph{state} yang diinginkan.
+  }
+  \item{Komponen kube-scheduler adalah komponen yang bertugas
+    untuk menempatkan \emph{Pod} pada \emph{Node} yang sesuai. Komponen ini
+    akan menentukan \emph{Node} yang sesuai dengan kriteria \emph{Pod} yang
+    akan dijalankan.
+  }
+  \item{Komponen cloud-controller-manager merupakan komponen
+    yang opsional dan digunakan oleh klaster Kubernetes untuk berinteraksi
+    dengan API dari penyedia jasa \emph{cloud}. Komponen ini sebagai pemisah
+    antara API dari penyedia jasa \emph{cloud} dengan API dari Kubernetes.
+  }
+\end{enumerate}
+
+\subsubsection{Kubernetes Node}
+
+Server lain selain Kubernetes Control Plane adalah \emph{worker node}
+akan berperan sebagai tempat menjalankan \emph{Pod} yang berisi aplikasi
+\emph{containerized}. \emph{Worker node} terdiri dari komponen kubelet, kube-proxy,
+dan \emph{container runtime}.
+
+\begin{enumerate}[itemsep=-0.2cm, topsep=-0.3cm]
+  \item{Komponen kubelet adalah komponen agen yang berjalan pada
+    setiap \emph{node} dalam klaster Kubernetes. Komponen ini bertugas untuk
+    memastikan \emph{Pod} yang dijadwalkan pada \emph{Node} tersebut berjalan
+    dengan baik.
+  }
+  \item{Komponen kube-proxy berjalan di setiap \emph{Node} pada
+    klaster. Komponen ini bertugas untuk mengelola jaringan pada \emph{Node}.
+    Jaringan tersebut digunakan untuk melakukan komunikasi dari dalam klaster
+    maupun luar klaster menuju \emph{Pod}. Kube-proxy memastikan \emph{request}
+    dikirimkan ke \emph{Pod}, lebih tepatnya \emph{container}, yang tepat serta bertanggung
+    jawab atas jaringan tersebut sehingga dapat diakses dan diprediksi namun tetap terisolasi.
+  }
+  \item{Komponen \emph{container runtime} adalah komponen yang bertugas
+    untuk mengatur \emph{container} pada \emph{node} tersebut karena pada dasarnya setiap
+    \emph{job} atau aplikasi yang dibuat pada klaster akan dijalankan di dalam \emph{container}.
+    Kubernetes mendukung beberapa \emph{container runtime} yang ada yaitu Docker, containerd, dan
+    \emph{container} yang mengimplementasikan Kubernetes Container Runtime Interface (CRI).
+  }
+\end{enumerate}
+
+\subsection{Objek pada Kubernetes}
+
+Kubernetes memiliki beberapa objek yang digunakan untuk mengatur jalannya
+klaster. Objek pada Kubernetes merupakan entitas persisten yang ada pada sistem
+Kubernetes. 
+
+\subsubsection{\emph{Pod}}
+
+\emph{Pod} adalah unit terkecil yang dapat dibuat dalam Kubernetes. Aplikasi
+\emph{containerized} dijalankan di dalam \emph{Pod}. \emph{Pod} pada Kubernetes
+dapat berisi satu atau lebih \emph{container} yang saling berbagi \emph{network}
+dan \emph{storage}. Konfigurasi \emph{Pod} dapat diatur melalui sebuah konfigurasi
+Podspec yang memiliki ekstensi .yaml.
+
+\subsubsection{\emph{Job}}
+
+\emph{Job} merupakan beban kerja pada Kubernetes. \emph{Job} akan menciptakan satu atau
+lebih \emph{Pod} untuk menyelesaikan tugas tersebut. \emph{Pod} yang diciptakan untuk menyelesaikan
+\emph{job} akan berhenti jika \emph{job} yang dilakukan sudah selesai. Jika \emph{Pod}
+berhenti namun \emph{job} terkait masih belum selesai, \emph{job} akan menciptakan \emph{Pod}
+baru untuk melanjutkan \emph{job} tersebut. \emph{Job} dapat menciptakan lebih dari satu
+\emph{Pod} untuk menyelesaikan tugas tersebut secara paralel.
+
+\subsubsection{\emph{Replication Controllers} dan \emph{ReplicaSet}}
+
+\emph{Replication Controllers} adalah objek yang mendefinisikan sebuah \emph{pod template}
+dan parameter kontrol untuk melakukan \emph{scaling} secara horizontal dengan menambahkan
+atau mengurangi jumlah \emph{Pod} yang sedang berjalan. \emph{Replication Controllers}
+bertanggung jawab untuk memastikan jumlah \emph{Pod} yang ada pada sebuah klaster
+sesuai dengan jumlah \emph{Pod} yang didefinisikan di awal oleh pengguna.
+
+\emph{ReplicaSet} merupakan versi lebih baru dari \emph{Replication Controllers} yang
+bertujuan untuk mengelola kumpulan \emph{Pod} yang stabil dan sedang berjalan. \emph{ReplicaSet}
+dapat melakukan mekanisme \emph{self-healing} dimana \emph{ReplicaSet} akan menjalankan
+kembali secara otomatis \emph{Pod} yang mengalami kegagalan saat sedang berjalan. \emph{ReplicaSet}
+juga dapat menambahkan atau mengurangi jumlah \emph{Pod} sama seperti \emph{Replication Controllers}.
+
+\subsubsection{\emph{Service}}
+
+\emph{Service} pada Kubernetes merupakan abstraksi dari \emph{Pod} yang bertugas untuk
+menyediakan sebuah alamat IP dan DNS untuk mengakses \emph{Pod} tersebut. \emph{Service}
+merupakan objek yang mengimplementasikan arsitektur REST. \emph{Service} memiliki beberapa tipe,
+yaitu ClusterIP, NodePort, LoadBalancer, dan ExternalName.
+
+\begin{enumerate}[itemsep=-0.2cm, topsep=-0.3cm]
+  \item{ClusterIP adalah tipe \emph{Service} yang mengekspos \emph{Service}
+      pada IP internal klaster. Dengan adanya ClusterIP, \emph{Service} hanya bisa
+      diakses dari dalam klaster.
+    }
+  \item{NodePort adalah tipe \emph{Service} yang mengekspos \emph{Service}
+      pada alamat IP dan \emph{port} statik setiap \emph{node}. Dengan tipe ini, \emph{Service}
+      dapat diakses dari luar dengan melakukan \emph{request} pada NodeIP dan NodePort.
+    }
+  \item{LoadBalancer adalah tipe \emph{Service} yang mengekspos \emph{Service} ke eksternal klaster
+      dengan menggunakan \emph{load balancer}. Kubernetes tidak menyediakan \emph{load balancer}
+      secara \emph{default}.
+    }
+  \item{ExternalName adalah tipe \emph{service} yang memetakan \emph{service} dengan sebuah
+      \emph{external name} dengan cara mengembalikan CNAME bersama dengan nilainya.
+    }
+\end{enumerate}
+
+\subsubsection{\emph{Horizontal Pod Autoscaler}}
+
+\emph{Horizontal Pod Autoscaler} adalah layanan dari Kubernetes yang memungkinkan
+\emph{scaling} jumlah \emph{Pod} yang ada pada \emph{Replication Controller} dan \emph{ReplicaSet} berdasarkan
+metrik tertentu yang bisa ditetapkan seperti penggunaan CPU dan memori secara otomatis.
+\emph{Horizontal Pod Autoscaler} diimplementasikan dalam bentuk sumber daya pada Kubernetes
+API dan \emph{controller}. \emph{Controller} tersebut secara periodik akan mengatur
+jumlah dari replika pada \emph{Replication Controller} sesuai dengan metrik penggunaan
+sumber daya dan target yang didefinisikan oleh pengguna.
+Cara kerja dari \emph{Horizontal Pod Autoscaler} ditunjukkan pada gambar \ref{fig:HorizontalPodAutoscalling}
+
+\emph{Horizontal Pod Autoscaler} menggunakan perbandingan dari metrik yang diinginkan
+dengan metrik keadaan saat ini. Hasil perbandingan tersebut akan digunakan sebagai penentuan
+jumlah replika yang akan dibuat. Persamaan untuk \emph{Horizontal Pod Autoscaler} dapat
+dilihat pada persamaan \ref{eq:hpaAlgorithm}.
+
+\begin{equation}
+  desiredReplicas = ceil [ currentReplicas \times \left( \frac{currentMetricValue}{desiredMetricValue} \right) ]
+  \label{eq:hpaAlgorithm}
+\end{equation}
+
+Nilai dari \emph{currentMetricValue} juga dapat dihitung berdasarkan rata-rata nilai
+sasaran pada seluruh \emph{Pod} tujuan apabila parameter \emph{targetAverageValue} atau
+\emph{targetAverageUtilization} ditentukan.
+
+\begin{figure} [H] \centering
+  \includegraphics[scale=0.6]{gambar/horizontal_pod_autoscalling_figure.png}
+  \caption{Horizontal Pod Autoscaler Kubernetes \parencite{kubernetes-website-hpa}}
+  \label{fig:HorizontalPodAutoscalling}
+\end{figure}
+
+\subsubsection{\emph{Kubernetes Cluster Autoscaler}}
+
+\emph{Kubernetes Cluster Autoscaler} digunakan untuk melakukan \emph{autoscaling}
+ukurang dari suatu klaster Kubernetes secara otomatis. Berbeda dengan \emph{autoscaling}
+yang dilakukan oleh \emph{Horizontal Pod Autoscaler} dan \emph{Vertical Pod Autoscaler} yang
+melakukan \emph{scaling} pada \emph{container} dan \emph{Node}, \emph{Kubernetes Cluster Autoscaler}
+melakukan \emph{scaling} pada infrastruktur dengan cara menambahkan atau mengurangi jumlah
+\emph{Node} pada suatu klaster.
+
+\subsection{Menambah \emph{worker node} pada klaster Kubernetes}
+
+Kubernetes memiliki protokol untuk menambahkan \emph{worker nodes} ke dalam klaster Kubernetes.
+
+Kubernetes memiliki \emph{tool} untuk menambahkan \emph{worker node} ke dalam sebuah klaster
+baik itu \emph{worker node} Linux \emph{operating system} atau \emph{worker node} Windows \emph{operating system}.
+\emph{Tool} tersebut adalah kubeadm. Kubeadm 
+
+\parencite{kubernetes-website-adding-linux-node}
 
 \subsection{\emph{Multi-tenant}}
 
-\emph{Multi-tenant} adalah sebuah konsep dimana sebuah sistem dapat digunakan
-oleh lebih dari satu pengguna atau \emph{tenant}. Dalam Kubernetes, implementasi
-\emph{multi-tenant} berada di kluster sehingga sebuah kluster dapat digunakan
-oleh satu atau lebih pengguna. Maka \parencite{oliva_multi-tenancy_2024}
+\emph{Multi-tenant} yang berarti banyak penyewa adalah konsep dimana sebuah sistem
+atau \emph{resources} dapat digunakan oleh lebih dari satu penyewa atau pengguna. Dalam
+konteks Kubernetes, \emph{multi-tenancy} berarti sebuah lingkungan Kubernetes dan \emph{resources}-nya
+dapat digunakan oleh lebih dari satu pengguna \parencite{oliva_multi-tenancy_2024}. Contoh gambar
+implementasi \emph{multi-tenancy} pada Kubernetes terdapat pada gambar \ref{fig:KubernetesMultiTenancy}
+
+\begin{figure} [H] \centering
+  \includegraphics[scale=0.7]{gambar/multi-tenancy.png}
+  \caption{\emph{multi-tenancy} pada Kubernetes \parencite{kubernetes-website-multi-tenancy}}
+  \label{fig:KubernetesMultiTenancy}
+\end{figure}
+
+Pada gambar di atas, implementasi \emph{multi-tenancy} pada Kubernetes
+membagi klaster berdasarkan pengguna dari klaster hasil pembagian, yaitu pembagian
+klaster untuk tim dalam projek dan pelanggan dari projek.
+
+Sistem atau \emph{resources} yang memiliki sifat \emph{multi-tenancy} harus memiliki
+mekanisme isolasi \emph{resources} untuk setiap pengguna dalam sistem. Hal tersebut
+diperlukan agar satu pengguna tidak memiliki akses terhadap \emph{resources} dari
+pengguna lainnya.
+
+% NOTE: this needs more explanation
+\subsection{\emph{Virtual cluster}}
+
+\emph{Virtual cluster} adalah klaster yang dibuat di atas klaster yang tersedia.
+\emph{Virtual cluster} dapat digunakan untuk membagi klaster yang ada menjadi beberapa
+klaster yang lebih kecil. Dengan menggunakan \emph{virtual cluster}, sebuah klaster
+dapat digunakan oleh beberapa pengguna yang menggunakan klaster tersebut dengan
+menggunakan \emph{virtual cluster} yang berbeda-beda dalam satu waktu. Dengan
+menggunakan klaster yang berbeda, maka isolasi \emph{resources} antar pengguna
+dapat terpenuhi.

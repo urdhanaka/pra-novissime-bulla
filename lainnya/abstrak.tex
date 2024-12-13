@@ -1,7 +1,7 @@
 \chapter*{ABSTRAK}
 \begin{center}
   \large
-  \textbf{IMPLEMENTASI \emph{MULTI-TENANCY} UNTUK \emph{PROVISIONING} KLUSTER KUBERNETES}
+  \textbf{IMPLEMENTASI \emph{MULTI-TENANCY} UNTUK \emph{PROVISIONING} KLASTER KUBERNETES}
 \end{center}
 \addcontentsline{toc}{chapter}{ABSTRAK}
 % Menyembunyikan nomor halaman
@@ -13,18 +13,33 @@
   \begin{tabular}{ll@{\hspace{6pt}}l}
   Nama Mahasiswa / NRP&:& Urdhanaka Aptanagi / 5025211123\\
   Departemen&:& Teknik Informatika FTEIC - ITS\\
-  Dosen Pembimbing&:& 1. Nikola Tesla, S.T., M.T.\\
-  & & 2. Wernher von Braun, S.T., M.T.\\
+  Dosen Pembimbing&:& 1. Royyana Muslim Ijtihadie, S.Kom., M.Kom., Ph.D.\\
+  & & 2. Ary Mazharuddin Shiddiqi, S.Kom., M.Comp.Sc., Ph.D.\\
   \end{tabular}
   \vspace{4ex}
 \end{flushleft}
 \textbf{Abstrak}
 
 % Isi Abstrak
-Sistem terdistribusi merupakan salah satu cara untuk meningkatkan kinerja
-dan keandalan sebuah sistem. Sebuah \emph{tools} yang sering digunakan dalam sistem
-terdistribusi adalah Kubernetes.
+Kubernetes adalah salah satu \emph{platform} yang digunakan untuk orkestrasi \emph{container}
+dan mampu untuk mengatur jalannya \emph{container} serta membuat sebuah klaster dari banyak
+perangkat fisik. Namun, Kubernetes tidak memiliki \emph{support} untuk \emph{multi-tenancy}
+secara \emph{default}. \emph{Multi-tenancy} telah menjadi hal yang umum untuk mengoptimasi utilisasi
+\emph{resources} dalam lingkungan \emph{cloud-native}. \emph{Multi-tenancy} pada
+Kubernetes membagi sebuah klaster fisik Kubernetes menjadi beberapa klaster
+kecil untuk pengguna. Pembagian ini dilakukan berdasarkan \emph{resource} komputasi
+yang dibutuhkan oleh pengguna. Selain itu, klaster kecil tersebut bersifat terisolasi
+dari klaster kecil lainnya dan \emph{resource} lain yang bukan milik klaster tersebut.
+Studi ini mengeksplor implementasi dari \emph{multi-tenancy} untuk klaster Kubernetes. Dengan menggunakan \emph{native tools}
+dari Kubernetes dan \emph{external tools} lainnya, studi ini mengevaluasi perbedaan dari implementasi \emph{multi-tenancy} di Kubernetes.
+Klaster Kubernetes lokal versi 1.31.4 digunakan untuk demonstrasi dan evaluasi. Implementasi
+dilakukan dengan melakukan studi literatur mengenai \emph{native tools} dari Kubernetes melalui
+\emph{website} resmi Kubernetes dan mengenai \emph{external tools} dari penelitian-penelitian sebelumnya.
+Hasil yang didapat menunjukkan bahwa \emph{multi-tenancy} dapat meningkatkan efisiensi dan
+utilisasi \emph{resources} untuk penggunanya. Selain itu, implementasi \emph{multi-tenancy} dapat membagi
+klaster menjadi klaster-klaster yang kecil dengan isolasi untuk tiap klaster.
+Studi ini juga menunjukkan bahwa \emph{multi-tenancy} berkontribusi untuk operasi \emph{cloud-native} yang lebih hemat biaya.
 
 \vspace{2ex}
 \noindent
-\textbf{Kata Kunci: \emph{multi-tenancy, virtual cluster, kubernetes}}
+\textbf{Kata Kunci: \emph{cloud computing, kubernetes, multi-tenancy, resources isolation}}

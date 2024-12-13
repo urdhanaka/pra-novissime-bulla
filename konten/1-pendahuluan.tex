@@ -6,50 +6,71 @@ Internet merupakan salah satu inovasi yang mengubah dunia. Internet
 memungkinkan penggunanya untuk berkomunikasi, berbagi informasi, dan
 mengakses berbagai layanan. Salah satu bentuk layanan tersebut adalah
 layanan komputasi dimana pengguna dapat menggunakan sumber daya komputasi
-yang telah disediakan sehingga pengguna tidak perlu melakukan komputasi
-di perangkat mereka sendiri. Hal tersebut memungkinkan pengguna untuk
+yang disediakan oleh penyedia jasa sehingga pengguna tidak perlu melakukan
+komputasi di perangkat mereka sendiri. Hal tersebut memungkinkan pengguna untuk
 melakukan komputasi yang berat tanpa harus memiliki perangkat yang
 memadai.
 
-Pengelolaan sumber daya komputasi memerlukan manajemen yang
-baik agar sumber daya tersebut dapat digunakan secara efisien dan sesuai
-dengan kebutuhan pengguna. Untuk mengelola sumber daya komputasi tersebut,
-salah satu \emph{tools} yang dapat digunakan adalah Kubernetes. Kubernetes
-adalah sebuah sistem manajemen \emph{container} sumber terbuka.
+Penyedia jasa komputasi tersebut biasanya memiliki sumber daya komputasi
+yang sangat besar untuk melayani pengguna mereka. Sumber daya komputasi
+tersebut berupa satu atau lebih server fisik. Penggunaan server
+fisik tersebut dapat diatur dengan menggunakan teknologi virtualisasi
+yang nantinya membagi server fisik tersebut menjadi beberapa bagian
+yang akan digunakan oleh pengguna agar \emph{resources} server fisik tersebut
+dapat digunakan secara maksimal. Selain itu, penggunaan teknologi virtualisasi dapat
+mengurangi \emph{cost} dibandingkan dengan menggunakan lebih banyak server fisik.
+
+Pengelolaan sumber daya komputasi memerlukan manajemen yang baik agar sumber
+daya tersebut dapat digunakan secara efisien dan sesuai dengan kebutuhan
+pengguna. Untuk mengelola sumber daya komputasi tersebut, salah satu
+\emph{tool} yang dapat digunakan adalah Kubernetes. Kubernetes
+adalah sebuah sistem manajemen \emph{container} sumber terbuka. Kubernetes
+didesain untuk mengelola siklus hidup dari \emph{container} sehingga kelangsungan
+sistem dapat diprediksi, \emph{scalable}, serta memiliki ketersediaan yang tinggi.
+Beberapa layanan yang disediakan oleh Kubernetes adalah \emph{load balancing} dan
+\emph{service discovery}, orkestrasi untuk tempat penyimpanan, automasi sistem
+untuk \emph{rollout} dan \emph{rollback} sistem, serta mekanisme pemulihan
+pada sistem.
 
 Namun, penggunaan Kubernetes secara \emph{default} bukan berupa \emph{multi-tenant}.
-Semua \emph{pods} yang merupakan unit terkecil di dalam Kubernetes dapat berinteraksi
-satu sama lain dan semua \emph{network traffic} tidak terenkripsi \parencite{kubernetes-website-multi-tenancy}.
+Semua \emph{pods} yang merupakan unit terkecil di dalam klaster Kubernetes dapat
+berinteraksi satu sama lain dan semua \emph{network traffic} tidak terenkripsi \parencite{kubernetes-website-multi-tenancy}.
 Hal tersebut dapat menimbulkan masalah karena pengguna yang satu dapat
 melihat data dari pengguna yang lain. Oleh karena itu, diperlukan
-implementasi \emph{multi-tenancy} pada Kubernetes jika sebuah kluster Kubernetes
+implementasi \emph{multi-tenancy} pada Kubernetes jika sebuah klaster Kubernetes
 akan digunakan oleh lebih dari satu pengguna.
 
 Pada penelitian ini akan dibahas mengenai implementasi \emph{multi-tenancy}
-pada Kubernetes. Implementasi tersebut diharapkan membuat kluster
+pada Kubernetes. Implementasi tersebut diharapkan membuat klaster
 Kubernetes dapat digunakan oleh beberapa pengguna sekaligus.
 
 \section{Rumusan Masalah}
 
 Berdasarkan hal yang telah dipaparkan di latar belakang, rumusan masalah
 yang diangkat dalam Tugas Akhir ini adalah sebagai berikut:
-\begin{enumerate}
-  \vspace{-0.3cm}\item{Bagaimana cara mengimplementasikan \emph{multi-tenancy} pada kluster Kubernetes?}
-  \vspace{-0.3cm}\item{Apa perbedaan implementasi \emph{multi-tenancy} yang dapat digunakan pada kluster Kubernetes?}
+\begin{enumerate}[itemsep=-0.2cm, topsep=-0.3cm]
+  \item{Bagaimana cara mengimplementasikan \emph{multi-tenancy} pada klaster Kubernetes?}
+  \item{Apa perbedaan implementasi \emph{multi-tenancy} yang dapat digunakan pada klaster Kubernetes?}
 \end{enumerate}
 
 \section{Batasan Masalah atau Ruang Lingkup}
 
 Batasan masalah atau ruang lingkup dari penelitian ini adalah sebagai berikut:
-\begin{enumerate}
-  \vspace{-0.3cm}\item{asdasdad}
+\begin{enumerate}[itemsep=-0.2cm, topsep=-0.3cm]
+  \item{Klaster Kubernetes yang dibuat berada di lokal (komputer penulis) menggunakan \emph{tools} untuk membuat klaster lokal}
+  \item{Versi Kubernetes yang digunakan adalah versi v1.31.4}
 \end{enumerate}
 
 \section{Tujuan}
 
-Tujuan dari penelitian ini adalah mengimplementasikan \emph{multi-tenancy}
-pada kluster Kubernetes yang dapat digunakan.
+Tujuan dari penelitian ini adalah sebagai berikut:
+\begin{enumerate}[itemsep=-0.2cm, topsep=-0.3cm]
+  \item{Mengimplementasikan \emph{multi-tenancy} pada klaster Kubernetes yang dapat digunakan.}
+  \item{Mengetahui perbedaan implementasi \emph{multi-tenancy} pada Kubernetes.}
+\end{enumerate}
 
 \section{Manfaat}
 
-Manfaat dari penelitian ini adalah 
+Manfaat dari penelitian ini adalah untuk meningkatkan kegunaan dari
+klaster Kubernetes sehingga dapat mengurangi \emph{cost} dalam penyediaan
+\emph{resources computing}.
