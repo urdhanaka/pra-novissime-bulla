@@ -7,33 +7,55 @@ dan teori dasar yang akan digunakan dalam penelitian.
 
 \subsection{Multi-tenancy in Cloud Computing}
 
-Paper ini membahas mengenai \emph{multi-tenancy} pada \emph{cloud computing}
-dan bagaimana \emph{multi-tenancy} dapat diimplementasikan pada \emph{cloud computing}.
-\emph{Multi-tenancy} dapat berdampak positif pada perkembangan \emph{cloud computing} karena
-dengan \emph{multi-tenancy}, penyedia jasa dapat menggunakan \emph{resources} secara efisien
-dengan cara membagi \emph{resources} tersebut kepada beberapa penyewa. Dengan demikian, penyedia
-jasa dapat mengurangi \emph{cost} dalam penyediaan \emph{resources}.
+Paper ini membahas mengenai definisi \emph{multi-tenancy} pada \emph{cloud computing}
+dan bagaimana \emph{multi-tenancy} dapat diimplementasikan pada \emph{cloud computing} beserta
+manfaat dan kekurangan dari \emph{multi-tenancy}. \emph{Multi-tenancy} dapat berdampak positif
+pada perkembangan \emph{cloud computing} karena dengan \emph{multi-tenancy}, penyedia jasa dapat
+menggunakan \emph{resources} secara efisien dengan cara membagi \emph{resources} fisik kepada
+beberapa penyewa. Dengan demikian, penyedia jasa dapat mengurangi \emph{cost} dalam penyediaan \emph{resources}.
 
-\emph{Multi-tenancy} pada \emph{cloud computing} juga memiliki tantangan dalam
-implementasinya yaitu di bidang keamanan. Dalam \emph{multi-tenancy}, penyewa
-menggunakan \emph{resources} yang sama dengan penyewa lainnya. Hal ini dapat
+Walaupun \emph{multi-tenancy} memiliki kelebihan tersebut,
+\emph{multi-tenancy} pada \emph{cloud computing} juga memiliki tantangan dalam
+implementasinya salah satunya yaitu di bidang keamanan. Dalam \emph{multi-tenancy}, penyewa
+menggunakan \emph{resources} fisik yang sama dengan penyewa lainnya. Hal ini dapat
 menyebabkan masalah ketika salah satu penyewa memiliki tujuan tidak baik. Karena
-penyewa menggunakan \emph{resources} yang sama, proses mitigasi tradisional tidak
+penyewa menggunakan \emph{resources} fisik yang sama, proses mitigasi tradisional tidak
 dapat digunakan \parencite{6830928}.
 
 % NOTE: this one might be not relevant
 \subsection{ViteraaS: Virtual Cluster as a Service}
 
 Implementasi penggunaan \emph{virtual cluster} pada penelitian ini
-digunakan untuk membagi banyak komputer fisik yang tergabung menjadi satu klaster
+berfokus pada pembagian banyak komputer fisik yang tergabung pada satu klaster
 menjadi beberapa klaster virtual yang lebih kecil sesuai dengan kriteria yang diberikan oleh
-pengguna seperti jumlah \emph{nodes} yang dibutuhkan \parencite{6133210}.
+pengguna seperti jumlah \emph{nodes} yang dibutuhkan.
+
+Studi kasus yang digunakan pada penelitian ini adalah penggunaan sumber daya komputasi yang dimiliki oleh
+universitas. Sumber daya komputasi pada universitas seperti PC dari lab dan server biasanya tidak
+terutilisasi dengan baik (tidak begitu digunakan) pada saat malam dan libur semester. Namun, sumber daya
+komputasi akan sangat banyak digunakan pada saat mendekati akhir semester dengan banyaknya tugas dan
+ujian.
+
+Dengan studi kasus yang sudah dijelaskan, penulis dari penelitian ini mengajukan sebuah \emph{virtual-cluster-as-a-service} bernama ViteraaS
+yang digunakan untuk membuat \emph{virtual cluster} dari \emph{pool} sumber daya komputasi di Hochschule Furtwangen University (HFU).
+ViteraaS juga terintegrasi dengan infrastruktur yang sudah ada sebelumnya di HFU seperti \emph{Single Sign-On} (SSO).
+Selain itu, ViteraaS juga mengutilisasi komponen lainnya seperti OpenNebula, sebuah \emph{tool} untuk mengatur infrastruktur virtual,
+untuk membuat klaster \emph{virtual machine} secara dinamik.
+Target dari penelitian ini ditujukan kepada Hochschule Furtwangen University (HFU) lebih tepatnya
+yaitu staf dan mahasiswa HFU yang melakukan komputasi berat \parencite{6133210}.
 
 \subsection{A Multi-Tenant Framework for Cloud Container Services}
 
+Kubernetes tidak memiliki fitur \emph{multi-tenancy} yang memadai. \emph{Multi-tenancy}
+pada Kubernetes dapat dicapai melalui beberapa cara seperti menggunakan \emph{namespace}
+untuk membagi \emph{resource} Kubernetes tiap pengguna dan menggunakan \emph{dedicated} klaster
+untuk membagi \emph{permission} sehingga pengguna tidak dapat mengakses \emph{resource}
+yang bukan miliknya. Namun, cara tersebut menimbulkan beberapa masalah seperti masalah
+performa dan infrastruktur dari Kubernetes.
+
 Penelitian ini membahas mengenai implementasi \emph{multi-tenancy} pada
-Kubernetes dengan menggunakan \emph{framework VirtualCluster}. \emph{Framework}
-yang diajukan pada penelitian ini menyediakan isolasi pada \emph{control plane}
+Kubernetes dengan menggunakan \emph{framework} VirtualCluster. \emph{Framework}
+VirtualCluster yang diajukan pada penelitian ini menyediakan isolasi pada \emph{control plane}
 dan \emph{data plane} namun tetap berada di \emph{resources} fisik yang sama.
 
 Implementasi dari \emph{framework} ini membuat setiap pengguna dalam klaster
@@ -46,16 +68,20 @@ dan tidak mengetahui pengguna lain yang menggunakan \emph{resources} fisik yang 
 
 \subsection{Kubernetes}
 
-Kubernetes adalah sebuah sistem manajemen aplikasi yang dikemas (\emph{containerized})
-yang bersifat sumber terbuka. Kubernetes dibuat berdasarkan \emph{tool} internal
+Kubernetes adalah sebuah platform manajemen aplikasi yang dikemas (\emph{containerized})
+bersifat sumber terbuka. Kubernetes dibuat berdasarkan \emph{tool} internal
 yang diciptakan oleh Google bernama Borg untuk mengelola layanan mereka dalam bentuk
 \emph{container} \parencite{43438} kemudian beberapa pengembang Borg menciptakan
 \emph{tool} serupa namun bersifat sumber terbuka yang kemudian diberi nama Kubernetes.
 
+Kubernetes dapat mengelola jalannya aplikasi berbasis kontainer seperti membuat
+aplikasi tersebut \emph{scalable} dengan cara menambah ataupun mengurangi kontainer
+yang menjalankan aplikasi tersebut sesuai dengan kebutuhan pengguna, 
+
 \subsection{Arsitektur Kubernetes}
 
 Kubernetes mengumpulkan satu atau lebih mesin/server menjadi sebuah klaster. Klaster
-pada Kubernetes adalah tempat dimana semua aplikasi, \emph{jobs}, dan komponen Kubernetes
+pada Kubernetes adalah tempat dimana semua aplikasi, \emph{Jobs}, dan komponen Kubernetes
 berjalan. Dalam satu klaster Kubernetes terdapat satu server atau satu kelompok server
 yang berperan sebagai \emph{control plane} dan server sisanya menjadi \emph{worker node}.
 
@@ -127,7 +153,7 @@ dan \emph{container runtime}.
   }
   \item{Komponen \emph{container runtime} adalah komponen yang bertugas
     untuk mengatur \emph{container} pada \emph{node} tersebut karena pada dasarnya setiap
-    \emph{job} atau aplikasi yang dibuat pada klaster akan dijalankan di dalam \emph{container}.
+    \emph{Job} atau aplikasi yang dibuat pada klaster akan dijalankan di dalam \emph{container}.
     Kubernetes mendukung beberapa \emph{container runtime} yang ada yaitu Docker, containerd, dan
     \emph{container} yang mengimplementasikan Kubernetes Container Runtime Interface (CRI).
   }
@@ -151,9 +177,9 @@ Podspec yang memiliki ekstensi .yaml.
 
 \emph{Job} merupakan beban kerja pada Kubernetes. \emph{Job} akan menciptakan satu atau
 lebih \emph{Pod} untuk menyelesaikan tugas tersebut. \emph{Pod} yang diciptakan untuk menyelesaikan
-\emph{job} akan berhenti jika \emph{job} yang dilakukan sudah selesai. Jika \emph{Pod}
-berhenti namun \emph{job} terkait masih belum selesai, \emph{job} akan menciptakan \emph{Pod}
-baru untuk melanjutkan \emph{job} tersebut. \emph{Job} dapat menciptakan lebih dari satu
+\emph{Job} akan berhenti jika \emph{Job} yang dilakukan sudah selesai. Jika \emph{Pod}
+berhenti namun \emph{Job} terkait masih belum selesai, \emph{Job} akan menciptakan \emph{Pod}
+baru untuk melanjutkan \emph{Job} tersebut. \emph{Job} dapat menciptakan lebih dari satu
 \emph{Pod} untuk menyelesaikan tugas tersebut secara paralel.
 
 \subsubsection{\emph{Replication Controllers} dan \emph{ReplicaSet}}
@@ -235,15 +261,52 @@ melakukan \emph{scaling} pada \emph{container} dan \emph{Node}, \emph{Kubernetes
 melakukan \emph{scaling} pada infrastruktur dengan cara menambahkan atau mengurangi jumlah
 \emph{Node} pada suatu klaster.
 
+\subsubsection{\emph{Namespace}}
+
+Kubernetes menyediakan fitur isolasi \emph{resources} dalam satu klaster dengan
+menggunakan \emph{namespace}. \emph{Namespace} digunakan dalam \emph{environment}
+Kubernetes yang memiliki beberapa pengguna atau tim dalam satu klaster. \emph{Namespace}
+menyediakan \emph{scope} untuk nama \emph{resources}. Nama \emph{resources} harus unik
+dalam satu \emph{namespace} namun tidak harus unik antar \emph{namespace}. \emph{Namespace}
+tidak dapat dibagi secara \emph{nested} (menggunakan \emph{namespace} dalam \emph{namespace})
+dan tiap \emph{resources} hanya dapat berada dalam satu \emph{namespace}.
+
+Secara \emph{default}, Kubernetes memiliki beberapa \emph{namespace} yang sudah
+tersedia, yaitu \emph{default}, \emph{kube-node-lease}, \emph{kube-public}, dan \emph{kube-system}.
+
+\begin{enumerate}[itemsep=-0.2cm, topsep=-0.3cm]
+  \item{\emph{Namespace default} adalah \emph{namespace} yang dibuat secara otomatis
+      pada saat membuat klaster Kubernetes sehingga pengguna klaster dapat langsung
+      menggunakan klaster tanpa harus membuat \emph{namespace} terlebih dahulu.
+    }
+  \item{\emph{Namespace kube-node-lease} adalah \emph{namespace} yang berisi objek \emph{Lease}
+      Kubernetes pada setiap \emph{Node}. Objek \emph{Lease} digunakan oleh kubelet untuk
+      mengirim \emph{heartbeat} untuk mendeteksi apakah \emph{Node} tersebut masih hidup atau tidak.
+    }
+  \item{\emph{Namespace kube-public} adalah \emph{namespace} yang dapat diakses oleh semua
+      klien dan biasanya berisi informasi dari penggunaan klaster.
+    }
+  \item{\emph{Namespace kube-system} adalah \emph{namespace} yang berisi objek yang diciptakan
+      oleh Kubernetes.
+    }
+\end{enumerate}
+
 \subsection{Menambah \emph{worker node} pada klaster Kubernetes}
 
 Kubernetes memiliki protokol untuk menambahkan \emph{worker nodes} ke dalam klaster Kubernetes.
+Ketika sebuah \emph{worker node} ingin bergabung ke klaster Kubernetes, diperlukan hubungan
+dua arah antara \emph{worker node} dan klaster. Hubungan ini dapat dibagi menjadi dua proses, yaitu
+proses \emph{discovery} (\emph{node} memercayai klaster) dan \emph{bootstrap} TLS (klaster memercayai \emph{node}) \parencite{kubernetes-website-adding-linux-node}.
 
-Kubernetes memiliki \emph{tool} untuk menambahkan \emph{worker node} ke dalam sebuah klaster
+Terdapat 2 skema utama dalam proses \emph{discovery}. Skema pertama yaitu menggunakan token bersama beserta
+alamat IP dari API server. Skema kedua adalah menyediakan sebuah \emph{file} yang merupakan
+\emph{subset} dari standar konfigurasi kubeconfig yang berisi informasi yang diperlukan oleh
+\emph{node} untuk bergabung ke klaster.
+
+Untuk mempermudah proses tersebut, Kubernetes memiliki \emph{tool} untuk menambahkan \emph{worker node} ke dalam sebuah klaster
 baik itu \emph{worker node} Linux \emph{operating system} atau \emph{worker node} Windows \emph{operating system}.
-\emph{Tool} tersebut adalah kubeadm. Kubeadm 
-
-\parencite{kubernetes-website-adding-linux-node}
+\emph{Tool} tersebut adalah kubeadm. Kubeadm merupakan \emph{tool} berbasis \emph{command line} untuk mengatur administrasi dari sebuah klaster
+Kubernetes. Kubeadm dapat membuat sebuah klaster serta menggabungkan sebuah \emph{node} ke dalam klaster.
 
 \subsection{\emph{Multi-tenant}}
 
@@ -255,7 +318,7 @@ implementasi \emph{multi-tenancy} pada Kubernetes terdapat pada gambar \ref{fig:
 
 \begin{figure} [H] \centering
   \includegraphics[scale=0.7]{gambar/multi-tenancy.png}
-  \caption{\emph{multi-tenancy} pada Kubernetes \parencite{kubernetes-website-multi-tenancy}}
+  \caption{\emph{Multi-tenancy} pada Kubernetes \parencite{kubernetes-website-multi-tenancy}}
   \label{fig:KubernetesMultiTenancy}
 \end{figure}
 
@@ -263,10 +326,21 @@ Pada gambar di atas, implementasi \emph{multi-tenancy} pada Kubernetes
 membagi klaster berdasarkan pengguna dari klaster hasil pembagian, yaitu pembagian
 klaster untuk tim dalam projek dan pelanggan dari projek.
 
+\emph{Multi-tenancy} juga dapat didefinisikan pada persamaan \ref{eq:multiTenancyEquation}
+
+\begin{equation}
+  \textit{Virtualization} + \textit{ResourceSharing} = \textit{Multi-Tenancy}
+  \label{eq:multiTenancyEquation}
+\end{equation}
+
+Berdasarkan persamaan di atas, \emph{multi-tenancy} dapat dicapai dengan penggabungan antara
+teknologi virtualisasi dan \emph{resource sharing} \parencite{6830928}.
+
 Sistem atau \emph{resources} yang memiliki sifat \emph{multi-tenancy} harus memiliki
 mekanisme isolasi \emph{resources} untuk setiap pengguna dalam sistem. Hal tersebut
 diperlukan agar satu pengguna tidak memiliki akses terhadap \emph{resources} dari
-pengguna lainnya. Isolasi pada
+pengguna lainnya. Isolasi \emph{multi-tenancy} pada Kubernetes terdiri dari beberapa
+jenis, yaitu isolasi pada tingkat \emph{namespace}
 
 % NOTE: this needs more explanation
 \subsection{\emph{Virtual cluster}}

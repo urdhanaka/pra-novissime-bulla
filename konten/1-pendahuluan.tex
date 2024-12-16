@@ -37,12 +37,15 @@ Semua \emph{pods} yang merupakan unit terkecil di dalam klaster Kubernetes dapat
 berinteraksi satu sama lain dan semua \emph{network traffic} tidak terenkripsi \parencite{kubernetes-website-multi-tenancy}.
 Hal tersebut dapat menimbulkan masalah karena pengguna yang satu dapat
 melihat data dari pengguna yang lain. Oleh karena itu, diperlukan
-implementasi \emph{multi-tenancy} pada Kubernetes jika sebuah klaster Kubernetes
-akan digunakan oleh lebih dari satu pengguna.
+implementasi \emph{multi-tenancy} yang baik pada Kubernetes jika
+sebuah klaster Kubernetes akan digunakan oleh lebih dari satu pengguna.
 
 Pada penelitian ini akan dibahas mengenai implementasi \emph{multi-tenancy}
 pada Kubernetes. Implementasi tersebut diharapkan membuat klaster
-Kubernetes dapat digunakan oleh beberapa pengguna sekaligus.
+Kubernetes dapat digunakan oleh beberapa pengguna sekaligus dan juga dapat
+mengurangi \emph{cost} dengan cara memanfaatkan \emph{resources} yang ada
+pada klaster secara menyeluruh dan efektif sehingga tidak perlu menggunakan
+\emph{resources} yang baru.
 
 \section{Rumusan Masalah}
 
@@ -59,6 +62,7 @@ Batasan masalah atau ruang lingkup dari penelitian ini adalah sebagai berikut:
 \begin{enumerate}[itemsep=-0.2cm, topsep=-0.3cm]
   \item{Klaster Kubernetes yang dibuat berada di lokal (komputer penulis) menggunakan \emph{tools} untuk membuat klaster lokal}
   \item{Versi Kubernetes yang digunakan adalah versi v1.31.4}
+  \item{Penelitian ini akan menggunakan beberapa implementasi \emph{multi-tenancy} pada Kubernetes yang pernah diciptakan sebelumnya}
 \end{enumerate}
 
 \section{Tujuan}
