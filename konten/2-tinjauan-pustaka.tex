@@ -9,20 +9,31 @@ dan teori dasar yang akan digunakan dalam penelitian.
 
 Paper ini membahas mengenai definisi \emph{multi-tenancy} pada \emph{cloud computing}
 dan bagaimana \emph{multi-tenancy} dapat diimplementasikan pada \emph{cloud computing} beserta
-manfaat dan kekurangan dari \emph{multi-tenancy}. \emph{Multi-tenancy} dapat berdampak positif
-pada perkembangan \emph{cloud computing} karena dengan \emph{multi-tenancy}, penyedia jasa dapat
-menggunakan \emph{resources} secara efisien dengan cara membagi \emph{resources} fisik kepada
-beberapa penyewa. Dengan demikian, penyedia jasa dapat mengurangi \emph{cost} dalam penyediaan \emph{resources}.
+manfaat dan kekurangannya. \emph{Multi-tenancy} dapat berdampak positif pada perkembangan
+\emph{cloud computing} karena dengan \emph{multi-tenancy}, sebuah server fisik dapat
+dibagi kepada beberapa pengguna dengan teknologi virtualisasi. \emph{Multi-tenancy} memungkinkan
+pemilik dari server fisik tersebut untuk mengurangi \emph{cost} dalam penyediaan
+\emph{resources}.
 
 Walaupun \emph{multi-tenancy} memiliki kelebihan tersebut,
 \emph{multi-tenancy} pada \emph{cloud computing} juga memiliki tantangan dalam
-implementasinya salah satunya yaitu di bidang keamanan. Dalam \emph{multi-tenancy}, penyewa
-menggunakan \emph{resources} fisik yang sama dengan penyewa lainnya. Hal ini dapat
-menyebabkan masalah ketika salah satu penyewa memiliki tujuan tidak baik. Karena
-penyewa menggunakan \emph{resources} fisik yang sama, proses mitigasi tradisional tidak
-dapat digunakan \parencite{6830928}.
+implementasinya. Tantangan tersebut muncul karena \emph{multi-tenancy} memungkinkan
+pengguna untuk berbagi \emph{resources} fisik yang sama. Hal tersebut dapat menimbulkan
+tantangan dalam aspek keamanan.
 
-% NOTE: this one might be not relevant
+Tantangan keamanan muncul karena pengguna yang berperan sebagai pelaku dan pengguna
+yang menjadi korban berada pada satu server fisik yang sama. Kasus tersebut adalah
+kasus yang unik dan hanya muncul di sistem yang menggunakan teknologi \emph{multi-tenancy}.
+Contoh gambar perbedaan kasus antara \emph{multi-tenancy} dan tradisional terdapat pada
+gambar \ref{fig:MultiTenancyCase}. Karena pelaku dan korban menggunakan \emph{resources}
+fisik yang sama, proses mitigasi tradisional tidak dapat digunakan \parencite{6830928}.
+
+\begin{figure} [H] \centering
+  \includegraphics[scale=0.6]{gambar/multi-tenancy-case.png}
+  \caption{Perbedaan kasus antara \emph{multi-tenancy} dan tradisional}
+  \label{fig:MultiTenancyCase}
+\end{figure}
+
 \subsection{ViteraaS: Virtual Cluster as a Service}
 
 Implementasi penggunaan \emph{virtual cluster} pada penelitian ini
@@ -37,12 +48,10 @@ komputasi akan sangat banyak digunakan pada saat mendekati akhir semester dengan
 ujian.
 
 Dengan studi kasus yang sudah dijelaskan, penulis dari penelitian ini mengajukan sebuah \emph{virtual-cluster-as-a-service} bernama ViteraaS
-yang digunakan untuk membuat \emph{virtual cluster} dari \emph{pool} sumber daya komputasi di Hochschule Furtwangen University (HFU).
-ViteraaS juga terintegrasi dengan infrastruktur yang sudah ada sebelumnya di HFU seperti \emph{Single Sign-On} (SSO).
+yang digunakan untuk membuat \emph{virtual cluster} dari \emph{pool} sumber daya komputasi.
+ViteraaS juga terintegrasi dengan infrastruktur yang sudah ada sebelumnya seperti \emph{Single Sign-On} (SSO).
 Selain itu, ViteraaS juga mengutilisasi komponen lainnya seperti OpenNebula, sebuah \emph{tool} untuk mengatur infrastruktur virtual,
-untuk membuat klaster \emph{virtual machine} secara dinamik.
-Target dari penelitian ini ditujukan kepada Hochschule Furtwangen University (HFU) lebih tepatnya
-yaitu staf dan mahasiswa HFU yang melakukan komputasi berat \parencite{6133210}.
+untuk membuat klaster \emph{virtual machine} secara dinamik \parencite{6133210}.
 
 \subsection{A Multi-Tenant Framework for Cloud Container Services}
 
