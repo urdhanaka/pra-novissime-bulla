@@ -21,12 +21,18 @@
 \textbf{Abstrak}
 
 % Isi Abstrak
-Kubernetes adalah salah satu \emph{platform} yang digunakan untuk orkestrasi \emph{container}
-dan mampu untuk mengatur jalannya \emph{container} serta membuat sebuah klaster dari banyak
+Kubernetes adalah salah satu \emph{platform} yang digunakan untuk orkestrasi \emph{container},
+mengatur jalannya \emph{container} serta membuat sebuah klaster dari banyak
 perangkat fisik. Namun, Kubernetes tidak memiliki \emph{support} untuk \emph{multi-tenancy}
 secara \emph{default}. \emph{Multi-tenancy} telah menjadi hal yang umum untuk mengoptimasi utilisasi
-\emph{resources} dalam lingkungan \emph{cloud-native}. \emph{Multi-tenancy} pada
-Kubernetes membagi sebuah klaster fisik Kubernetes menjadi beberapa klaster
+\emph{resources} dalam lingkungan \emph{cloud-native}. \emph{Multi-tenancy} pada lingkungan
+\emph{cloud-native} membagi \emph{resource} yang ada agar dapat digunakan oleh banyak pengguna (\emph{multi tenant}).
+Kubernetes memiliki beberapa fitur untuk \emph{multi-tenancy}, salah satunya yaitu \emph{role-based access control}
+untuk membagi \emph{resource}.
+Penelitian dan riset sebelumnya mengenai implementasi \emph{multi-tenancy} pada Kubernetes
+Pada proposal ini, akan 
+
+Kubernetes membagi klaster Kubernetes menjadi beberapa klaster
 kecil untuk pengguna. Pembagian ini dilakukan berdasarkan \emph{resource} komputasi
 yang dibutuhkan oleh pengguna. Selain itu, klaster kecil tersebut bersifat terisolasi
 dari klaster kecil lainnya dan \emph{resource} lain yang bukan milik klaster tersebut.

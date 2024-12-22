@@ -4,33 +4,24 @@
 
 Internet merupakan salah satu inovasi yang mengubah dunia. Internet
 memungkinkan penggunanya untuk berkomunikasi, berbagi informasi, dan
-mengakses berbagai layanan. Salah satu bentuk layanan tersebut adalah
-layanan komputasi dimana pengguna dapat menggunakan sumber daya komputasi
-yang disediakan oleh penyedia jasa sehingga pengguna tidak perlu melakukan
-komputasi di perangkat mereka sendiri. Hal tersebut memungkinkan pengguna dari
-layanan komputasi untuk melakukan komputasi yang berat tanpa harus memiliki
-perangkat yang memadai.
+mengakses berbagai layanan. Teknologi internet yang semakin maju
+dan pengguna internet yang semakin banyak memunculkan banyak penyedia
+jasa layanan melalui internet, salah satunya yaitu penyedia jasa komputasi.
+Dengan menggunakan jasa komputasi, pengguna tidak perlu melakukan komputasi
+di perangkat mereka sendiri. Dengan begitu, komputasi berat dapat dilakukan
+dengan menyewa \emph{hardware} yang disediakan oleh penyedia jasa.
 
-Penyedia jasa komputasi tersebut biasanya memiliki sumber daya komputasi
-yang sangat besar untuk melayani pengguna mereka. Sumber daya komputasi
-tersebut berupa satu atau lebih server fisik. Penggunaan server
-fisik tersebut dapat diatur dengan menggunakan teknologi virtualisasi
-yang nantinya membagi server fisik tersebut menjadi beberapa bagian
-yang akan digunakan oleh pengguna agar \emph{resources} server fisik tersebut
-dapat digunakan secara maksimal. Selain itu, penggunaan teknologi virtualisasi dapat
-mengurangi \emph{cost} dibandingkan dengan menggunakan lebih banyak server fisik.
-
-Pengelolaan sumber daya komputasi memerlukan manajemen yang baik agar sumber
-daya tersebut dapat digunakan secara efisien dan sesuai dengan kebutuhan
-pengguna. Untuk mengelola sumber daya komputasi tersebut, salah satu
-\emph{tool} yang dapat digunakan adalah Kubernetes. Kubernetes
-adalah sebuah sistem manajemen \emph{container} sumber terbuka. Kubernetes
-didesain untuk mengelola siklus hidup dari \emph{container} sehingga kelangsungan
-sistem dapat diprediksi, \emph{scalable}, serta memiliki ketersediaan yang tinggi.
-Beberapa layanan yang disediakan oleh Kubernetes adalah \emph{load balancing} dan
-\emph{service discovery}, orkestrasi untuk tempat penyimpanan, automasi sistem
-untuk \emph{rollout} dan \emph{rollback} sistem, serta mekanisme pemulihan
-pada sistem.
+Semakin meningkatnya pengguna dari sebuah jasa, penyedia jasa perlu
+memikirkan tentang skalabilitas dari jasa yang mereka sediakan. Hal tersebut
+diperlukan agar \emph{resource} dapat digunakan secara efisien, adil, dan mampu
+untuk menangani banyaknya pengguna. Salah satu \emph{tools} yang dapat digunakan
+untuk skalabilitas adalah Kubernetes. Kubernetes adalah sebuah sistem manajemen
+\emph{container} sumber terbuka. Kubernetes didesain untuk mengelola siklus hidup
+dari \emph{container} sehingga kelangsungan sistem dapat diprediksi, \emph{scalable},
+serta memiliki ketersediaan yang tinggi. Beberapa layanan yang disediakan oleh
+Kubernetes adalah \emph{load balancing} dan \emph{service discovery},
+orkestrasi untuk tempat penyimpanan, automasi sistem untuk \emph{rollout}
+dan \emph{rollback} sistem, serta mekanisme pemulihan pada sistem.
 
 Namun, penggunaan Kubernetes secara \emph{default} bukan berupa \emph{multi-tenant}.
 Semua \emph{pods} yang merupakan unit terkecil di dalam klaster Kubernetes dapat
@@ -60,7 +51,7 @@ yang diangkat dalam Tugas Akhir ini adalah sebagai berikut:
 
 Batasan masalah atau ruang lingkup dari penelitian ini adalah sebagai berikut:
 \begin{enumerate}[itemsep=-0.2cm, topsep=-0.3cm]
-  \item{Klaster Kubernetes yang dibuat berada di lokal (komputer penulis) menggunakan \emph{tools} untuk membuat klaster lokal}
+  \item{Klaster Kubernetes yang digunakan berada di lokal menggunakan \emph{tools} untuk membuat klaster lokal}
   \item{Versi Kubernetes yang digunakan adalah versi v1.31.4}
   \item{Penelitian ini akan menggunakan beberapa implementasi \emph{multi-tenancy} pada Kubernetes yang pernah diciptakan sebelumnya}
 \end{enumerate}
