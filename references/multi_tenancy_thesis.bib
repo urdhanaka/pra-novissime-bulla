@@ -1,0 +1,15 @@
+
+@phdthesis{oliva_multi-tenancy_2024,
+	type = {laurea},
+	title = {Multi-{Tenancy} in {Kubernetes} {Clusters}},
+	copyright = {cc\_by\_nc\_nd},
+	url = {https://webthesis.biblio.polito.it/33340/},
+	abstract = {The growing demand for Kubernetes clusters and the increasing computational investments for 5G telecommunication infrastructure are leading to a big opportunity: competitiveness in the cloud computing market sector. Telcos could enter this market by leveraging spare resources from their infrastructure and providing Kubernetes clusters as a service. Nevertheless, a novel obstacle is presented by the Kubernetes design, as it was not designed with multi-tenancy in mind. In order to overcome this limitation, the conventional provisioning approach involves the installation of a dedicated cluster within Virtual Machines for each tenant.    Conventional provisioning techniques frequently result in resource waste and higher operating expenses to maintain tenant isolation. With an emphasis on resource allocation optimization and scalability enhancement while maintaining tenant isolation, this thesis explores resource-efficient multi-tenancy strategies for Kubernetes clusters, especially in the context of bare-metal deployments. The investigation resorted to adding multi-tenancy capabilities to a Kubernetes cluster, since there was no viable technology to enhance dedicated clusters. To accomplish this, a collection of technologies is needed to implement Kubernetes control and data plane isolation. One of the most intriguing control plane isolation techniques to emerge is the concept of virtual clusters. This approach enables the sharing of a single Kubernetes cluster by deploying specialized components that, while appearing as independent entities, primarily delegate operations to the underlying shared cluster. Meanwhile, the only data plane isolation that has been researched is pod sandboxing, which uses containers inside virtual machines (VMs) and is the most practical method in this situation. After comparing dedicated and shared cluster solutions, it was proved that the virtual cluster with pod sandboxing required fewer resources and produced a workload that was more efficient.    Another significant challenge in practice is the management of multiple tenant clusters. While multiple tenant clusters can be deployed on a single bare-metal cluster, the complexity increases when managing multiple clusters across different bare-metal environments. This work provides a concise overview of multi-cluster management strategies based on ClusterAPI, progressing from basic methods to more scalable and resilient solutions using Hosted Control Planes.},
+	language = {it},
+	urldate = {2024-11-29},
+	school = {Politecnico di Torino},
+	author = {Oliva, Attilio},
+	month = oct,
+	year = {2024},
+	file = {Full Text PDF:/home/urdhanaka/Zotero/storage/YKRNABFJ/Oliva - 2024 - Multi-Tenancy in Kubernetes Clusters.pdf:application/pdf;Snapshot:/home/urdhanaka/Zotero/storage/GFE9M5TU/33340.html:text/html},
+}
